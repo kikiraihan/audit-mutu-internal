@@ -9,7 +9,7 @@
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
 
-        <h1 class="text-3xl text-black pb-4">Tambah Form AMI Dokumen</h1>
+        <h1 class="text-3xl text-black pb-4">Tambah Audit Dokumen</h1>
         <section class="w-full">
             
             <form wire:submit.prevent="save" enctype='multipart/form-data'>

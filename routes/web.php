@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Livewire\AmidokumenAdd;
+use App\Http\Livewire\AmidokumenDetail;
 use App\Http\Livewire\AmidokumenEdit;
 use App\Http\Livewire\AmidokumenIndex;
 use App\Http\Livewire\FormAmidokumenAdd;
 use App\Http\Livewire\FormAmidokumenEdit;
 use App\Http\Livewire\FormAmidokumenIndex;
 use App\Http\Livewire\FormAmidokumenTimauditor;
+use App\Http\Livewire\JawabanAmidokumenDetail;
 use App\Http\Livewire\JawabanAmidokumenEdit;
 use App\Http\Livewire\JawabanAmidokumenIndex;
 use App\Http\Livewire\SuburaianEdit;
@@ -35,8 +37,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::group(['middleware' => ['auth','role:Admin']], function ($route) {
-    $route->get('/amidokumen', AmidokumenIndex::class)->name('amidokumen');
+Route::get('/amidokumen', AmidokumenIndex::class)->name('amidokumen')->middleware('role:Auditor|Admin');
+
+Route::group(['middleware' => ['auth','role:Auditor']], function ($route) {    
+    $route->get('/amidokumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail');
+});
+
+Route::group(['middleware' => ['auth','role:Admin']], function ($route) {    
     $route->get('/amidokumen/add', AmidokumenAdd::class)->name('amidokumen.add');
     $route->get('/amidokumen/{id}/edit', AmidokumenEdit::class)->name('amidokumen.edit');
     $route->get('/amidokumen/{id}/edit-suburaian', SuburaianEdit::class)->name('amidokumen.edit.suburaian');
@@ -54,6 +61,7 @@ Route::group(['middleware' => ['auth','role:Admin']], function ($route) {
 Route::group(['middleware' => ['auth','role:Auditee']], function ($route) {
     $route->get('/jawaban-amidokumen', JawabanAmidokumenIndex::class)->name('jawabanAmiDokumen');
     $route->get('/jawaban-amidokumen/{id}/edit', JawabanAmidokumenEdit::class)->name('jawabanAmiDokumen.edit');
+    $route->get('/jawaban-amidokumen/{id}/detail', JawabanAmidokumenDetail::class)->name('jawabanAmiDokumen.detail');
 });
 
 

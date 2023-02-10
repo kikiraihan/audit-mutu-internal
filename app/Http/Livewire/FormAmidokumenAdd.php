@@ -23,7 +23,7 @@ class FormAmidokumenAdd extends Component
     protected $rules = [
         'form.id_user_auditee'  =>'required',
         'form.id_ami_dokumen'   =>'required',
-        'form.ruang_lingkup'    =>'required',
+        'form.ruang_lingkup'    =>'nullable',
         'form.wakil_auditee'    =>'required',
         // 'form.status'           =>'required',
         // 'form.lapangan_lokasi'           =>'required',

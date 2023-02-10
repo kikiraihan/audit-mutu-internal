@@ -13,7 +13,8 @@ class JawabanAmidokumenIndex extends Component
     public $search;
 
     protected $listeners=[
-        'FixHapusFormAmidokumen'=>'hapusFormAmidokumen',
+        'FixSelesaiJawabanAmiDokumen'=>'SelesaiJawabanAmiDokumen',
+        'FixBatalSelesaiJawabanAmiDokumen'=>'BatalSelesaiJawabanAmiDokumen',
     ];
 
     public function render()
@@ -22,12 +23,28 @@ class JawabanAmidokumenIndex extends Component
         $ami=FormAmiDokumen::with(['amiDokumen','timAuditors'])
         ->where('id_user_auditee',Auth::user()->id)
         ->whereHas('amiDokumen', function($q){
-            $q->where('judul', 'like', '%'.$this->search.'%');
+            $q->where('judul', 'like', '%'.$this->search.'%')
+            ->orWhere('status', 'like', '%'.$this->search.'%');
         })->orderBy('created_at', 'desc');
 
         return view('livewire.jawaban-amidokumen-index', [
             'isiTabel' => $ami->paginate(30),
         ]);
     }
+
+    public function SelesaiJawabanAmiDokumen($id)
+    {
+        FormAmiDokumen::find($id)->update([
+            'status'=>'dalam validasi',
+        ]);
+    }
+
+    public function BatalSelesaiJawabanAmiDokumen($id)
+    {
+        FormAmiDokumen::find($id)->update([
+            'status'=>'dalam pengisian',
+        ]);
+    }
+
 
 }

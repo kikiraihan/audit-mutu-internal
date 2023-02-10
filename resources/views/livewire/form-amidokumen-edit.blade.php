@@ -9,7 +9,7 @@
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
 
-        <h1 class="text-3xl text-black pb-4">Edit Form AMI Dokumen</h1>
+        <h1 class="text-3xl text-black pb-4">Edit Audit Dokumen</h1>
         <section class="w-full">
             
             <form wire:submit.prevent="save" enctype='multipart/form-data'>
@@ -134,7 +134,7 @@
                             <x-atom.form-select-standar wire:model="form.status">
                                 <option value="" hidden selected>[belum dipilih]</option>
                                 @foreach ([
-                                    'dibuat', 'auditee', 'auditor', 'selesai'
+                                    'dalam pengisian', 'dalam validasi', 'selesai'
                                 ] as $item)
                                     <option class="w-full capitalize" value='{{$item}}'>
                                         {{$item}}

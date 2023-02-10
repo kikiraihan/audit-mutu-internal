@@ -17,8 +17,8 @@
         
         @hasanyrole('Admin')
             @foreach ([
-                ['route' => 'amidokumen', 'title' => 'Data AMI','icon'=>'fas fa-table mr-3'],
-                ['route' => 'formAmiDokumen', 'title' => 'Form AMI Dokumen','icon'=>'fas fa-list-alt mr-3'],
+                ['route' => 'amidokumen', 'title' => 'Instrumen AMI','icon'=>'fas fa-table mr-3'],
+                ['route' => 'formAmiDokumen', 'title' => 'Audit Dokumen','icon'=>'fas fa-list-alt mr-3'],
                 ['route' => 'user', 'title' => 'Users','icon'=>'fas fa-users mr-3'],
             ] as $item)    
                 <a href="{{ route($item['route']) }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline w-full h-full py-3 px-2 border-b border-light-border flex justify-between @if(request()->routeIs($item['route'])) bg-white @else @endif">
@@ -35,7 +35,23 @@
 
         @hasanyrole('Auditee')
             @foreach ([
-                ['route' => 'jawabanAmiDokumen', 'title' => 'Form AMI saya','icon'=>'fas fa-list-alt mr-3'],
+                ['route' => 'jawabanAmiDokumen', 'title' => 'Audit Dokumen saya','icon'=>'fas fa-list-alt mr-3'],
+            ] as $item)    
+                <a href="{{ route($item['route']) }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline w-full h-full py-3 px-2 border-b border-light-border flex justify-between @if(request()->routeIs($item['route'])) bg-white @else @endif">
+                    <span class="flex items-center">
+                        <i class="{{$item['icon']}} float-left mx-2"></i>
+                        {{$item['title']}}
+                    </span>
+                    <span class="flex items-center">
+                        <i class="fas fa-angle-right float-right"></i>
+                    </span>
+                </a>
+            @endforeach
+        @endhasanyrole
+
+        @hasanyrole('Auditor')
+            @foreach ([
+                ['route' => 'amidokumen', 'title' => 'Instrumen AMI','icon'=>'fas fa-table mr-3'],
             ] as $item)    
                 <a href="{{ route($item['route']) }}" class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline w-full h-full py-3 px-2 border-b border-light-border flex justify-between @if(request()->routeIs($item['route'])) bg-white @else @endif">
                     <span class="flex items-center">

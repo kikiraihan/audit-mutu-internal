@@ -33,8 +33,8 @@ class JawabanAmidokumenEdit extends Component
         $this->idFormAmi=$id;
         $this->jawabans=JawabanFormAmiDokumen::with(['jawabanable','formAmiDokumen'])
             ->where('id_form_ami_dokumen',$this->idFormAmi)
-            ->orderBy('jawabanable_type','asc')
-            ->orderBy('jawabanable_id','asc')
+            // ->orderBy('jawabanable_type','asc')
+            // ->orderBy('jawabanable_id','asc')
             ->get();
 
         // dd($this->jawabans);

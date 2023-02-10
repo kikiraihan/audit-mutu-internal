@@ -9,7 +9,7 @@
 
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
-        <h1 class="text-3xl">Form AMI Dokumen</h1>
+        <h1 class="text-3xl">Audit Dokumen</h1>
         <span class="text-sm">Formulir pengisian Dokumen Audit Mutu Internal</span>
         
         <div class="w-full pt-4">
@@ -56,7 +56,7 @@
                             </td>
                             <td class="text-center py-3 px-4">
                                 <span class="mr-2">{{$item->timAuditors->count()}}</span>
-                                <x-atom.link-table-only-faicon icon="fas fa-user-plus" 
+                                <x-atom.link-table-only-faicon icon="fas fa-user-edit" 
                                     warna="amber" class="px-2 py-1"
                                     href="{{ route('formAmiDokumen.auditor', ['id'=>$item->id]) }}"/>
                             </td>

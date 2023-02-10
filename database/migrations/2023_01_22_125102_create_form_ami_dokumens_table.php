@@ -17,9 +17,9 @@ class CreateFormAmiDokumensTable extends Migration
             $table->id();
             $table->foreignId('id_user_auditee')->references('id')->on('users');
             $table->foreignId('id_ami_dokumen')->references('id')->on('ami_dokumens');
-            $table->string('ruang_lingkup');
+            $table->string('ruang_lingkup')->nullable();
             $table->string('wakil_auditee');
-            $table->enum('status', ['dibuat', 'auditee', 'auditor', 'selesai'])->default('dibuat');
+            $table->enum('status', ['dalam pengisian', 'dalam validasi', 'selesai'])->default('dalam pengisian');
 
             //audit lapangan
             $table->string('lapangan_lokasi')->nullable();
