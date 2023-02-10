@@ -10,7 +10,7 @@
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
         <h1 class="text-3xl">Audit Dokumen</h1>
-        <span class="text-sm">Formulir pengisian Dokumen Audit Mutu Internal</span>
+        <span class="text-sm">Dokumen Audit Mutu Internal yang perlu di audit</span>
         
         <div class="w-full pt-4">
             <div class="grid grid-cols-4 items-center">
@@ -22,9 +22,6 @@
                 </div>
 
                 <div class="text-right col-span-2 pr-2">
-                    {{-- <x-atom.link-table-only-faicon icon="fas fa-plus" 
-                        warna="emerald" class="px-2 py-1" 
-                        href="{{ route('formAmiDokumen.add') }}"/> --}}
                 </div>
             </div>
 
@@ -37,7 +34,8 @@
                         <tr>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Created at</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Dokumen AMI</th>
-                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditor</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Auditee</th>
+                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Tim Auditor</th>
                             <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Status</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
                         </tr>
@@ -46,46 +44,39 @@
                         @foreach ($isiTabel as $item)
                         <tr>
                             <td class="text-left py-3 px-4">{{$item->created_at->diffForHumans()}}</td>
-                            <td class="text-left py-3 px-4">{{$item->amiDokumen->judul}}</td>
-                            <td class="text-center py-3 px-4">
+                            <td class="text-left py-3 px-4 text-xs">{{$item->amiDokumen->judul}}</td>
+                            <td class="text-left py-3 px-4">{{$item->auditee->name}}</td>
+                            <td class="text-center py-3 px-4 flex flex-row justify-center">
                                 @forelse ($item->timAuditors as $au)
-                                    <span>{{$au->name}} | {{$au->pivot->status}} </span>
-                                @empty
                                     <x-atom.badge class="bg-slate-100 rounded">
-                                        Belum ada auditor
+                                        {{$au->name}} | {{$au->pivot->status}} 
                                     </x-atom.badge>
+                                @empty
+                                    Belum ada auditor
                                 @endforelse
                             </td>
                             <td class="text-center py-3 px-4">
-                                {{-- @if ($item->status=="dalam validasi")
-                                    <x-atom.badge class="bg-green-200 rounded">
-                                        Selesai diisi
-                                    </x-atom.badge>
-                                @else --}}
                                 <span class="capitalize mr-2 text-xs">
                                     {{$item->status}}
                                 </span>
-                                {{-- @endif --}}
                             </td>
                             <td class="text-left py-3 px-4 flex justify-end space-x-2">
-                                @if ($item->status=="dalam pengisian")
-                                    <x-atom.link-table-with-faicon icon="fas fa-pen-alt" warna="blue" class="px-2 py-1"
+                                @if ($item->status=="dalam validasi")
+                                    <x-atom.link-table-only-faicon icon="fas fa-eye" warna="blue" class="px-2 py-1"
+                                    href="{{ route('jawabanAmiDokumen.detail', ['id'=>$item->id]) }}"/>
+                                    {{-- <x-atom.link-table-with-faicon icon="fas fa-pen-alt" warna="blue" class="px-2 py-1"
                                     href="{{ route('jawabanAmiDokumen.edit', ['id'=>$item->id]) }}">
                                     Jawab
                                     </x-atom.link-table-with-faicon>
 
                                     <x-atom.button-table-with-faicon icon="fas fa-check" warna="green"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixSelesaiJawabanAmiDokumen','{{$item->id}}','anda akan menyelesaikan pengisian dan tidak dapat diubah lagi. Apakah anda sudah memastikan data sudah benar?')">
                                         Selesaikan
-                                    </x-atom.button-table-with-faicon>
+                                    </x-atom.button-table-with-faicon> --}}
                                 @else
-                                    {{-- <x-atom.badge class="bg-green-200 rounded">
-                                        Selesai diisi
-                                    </x-atom.badge> --}}
+                                    <x-atom.badge class="bg-green-200 rounded">
+                                        Selesai diperiksa
+                                    </x-atom.badge>
 
-                                    <x-atom.link-table-only-faicon icon="fas fa-eye" warna="blue" class="px-2 py-1"
-                                    href="{{ route('jawabanAmiDokumen.detail', ['id'=>$item->id]) }}"/>
-
-                                    
                                     {{-- <x-atom.button-table-with-faicon icon="fas fa-times" warna="rose"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixBatalSelesaiJawabanAmiDokumen','{{$item->id}}','anda akan membatalkan status selesai, dan menarik kembali')">
                                         Batal selesai
                                     </x-atom.button-table-with-faicon> --}}

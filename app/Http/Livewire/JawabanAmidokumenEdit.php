@@ -8,11 +8,9 @@ use App\Models\Uraian;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-use function PHPUnit\Framework\isEmpty;
-
 class JawabanAmidokumenEdit extends Component
 {
-    use WithPagination;
+    // use WithPagination;
     public $idFormAmi;
     public $jawabans;
     // public FormAmiDokumen $form;
