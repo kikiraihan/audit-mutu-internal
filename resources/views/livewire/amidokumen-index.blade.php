@@ -53,6 +53,9 @@
                             <td class="text-center py-3 px-4">{{$item->suburaians->count()}}</td>
                             <td class="text-left py-3 px-4 flex justify-end space-x-2">
                                 @hasanyrole('Admin')
+                                <x-atom.link-table-only-faicon icon="fas fa-eye" 
+                                warna="blue" class="px-2 py-1"
+                                href="{{ route('amidokumen.detail', ['id'=>$item->id]) }}"/>
                                 <x-atom.link-table-only-faicon icon="fas fa-edit" 
                                 warna="yellow" class="px-2 py-1"
                                 href="{{ route('amidokumen.edit', ['id'=>$item->id]) }}"/>

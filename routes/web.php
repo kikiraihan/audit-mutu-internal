@@ -5,6 +5,7 @@ use App\Http\Livewire\AmidokumenDetail;
 use App\Http\Livewire\AmidokumenEdit;
 use App\Http\Livewire\AmidokumenIndex;
 use App\Http\Livewire\AuditorAmidokumen;
+use App\Http\Livewire\AuditorAmidokumenDetail;
 use App\Http\Livewire\AuditorAmidokumenEdit;
 use App\Http\Livewire\FormAmidokumenAdd;
 use App\Http\Livewire\FormAmidokumenEdit;
@@ -35,9 +36,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {return view('welcome');})->name('base');
-Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth'])->name('dashboard');
-Route::get('/instrumen', AmidokumenIndex::class)->name('amidokumen')->middleware('role:Auditor|Admin');
-Route::get('/jawaban-amidokumen/{id}/detail', JawabanAmidokumenDetail::class)->name('jawabanAmiDokumen.detail')->middleware('role:Auditor|Auditee');
+Route::get('/dashboard', function () {return view('dashboard');})
+    ->middleware(['auth'])->name('dashboard');
+Route::get('/instrumen', AmidokumenIndex::class)->name('amidokumen')
+    ->middleware('role:Auditor|Admin');
+Route::get('/instrumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail')
+    ->middleware('role:Auditor|Admin');
 
 Route::group(['middleware' => ['auth','role:Admin']], function ($route) {    
     $route->get('/instrumen/add', AmidokumenAdd::class)->name('amidokumen.add');
@@ -57,12 +61,13 @@ Route::group(['middleware' => ['auth','role:Admin']], function ($route) {
 Route::group(['middleware' => ['auth','role:Auditee']], function ($route) {
     $route->get('/jawaban-amidokumen', JawabanAmidokumenIndex::class)->name('jawabanAmiDokumen');
     $route->get('/jawaban-amidokumen/{id}/edit', JawabanAmidokumenEdit::class)->name('jawabanAmiDokumen.edit');
+    $route->get('/jawaban-amidokumen/{id}/detail', JawabanAmidokumenDetail::class)->name('jawabanAmiDokumen.detail');
 });
 
 Route::group(['middleware' => ['auth','role:Auditor']], function ($route) {    
-    $route->get('/amidokumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail');
     $route->get('/auditor-amidokumen', AuditorAmidokumen::class)->name('auditorAmidokumen');
-    $route->get('/auditor-amidokumen/{id}/edit', AuditorAmidokumenEdit::class)->name('auditorAmidokumen.edit');
+    $route->get('/auditor-jawaban-amidokumen/{id}/edit', AuditorAmidokumenEdit::class)->name('auditorAmidokumen.edit');
+    $route->get('/auditor-jawaban-amidokumen/{id}/detail', AuditorAmidokumenDetail::class)->name('auditorAmidokumen.detail');
 });
 
 

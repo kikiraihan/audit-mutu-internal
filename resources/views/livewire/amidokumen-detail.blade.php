@@ -9,7 +9,7 @@
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
 
-        <h1 class="text-3xl text-black pb-4">Edit AMI Dokumen</h1>
+        <h1 class="text-3xl text-black pb-4">Detail Instrumen AMI</h1>
         <section class="w-full">
             
             <div class="bg-white overflow-auto mb-6 py-3 px-6 rounded text-justify">

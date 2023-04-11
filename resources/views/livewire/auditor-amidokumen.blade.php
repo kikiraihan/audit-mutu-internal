@@ -9,8 +9,8 @@
 
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
-        <h1 class="text-3xl">Audit Dokumen</h1>
-        <span class="text-sm">Dokumen Audit Mutu Internal yang perlu di audit</span>
+        <h1 class="text-3xl">Data Audit</h1>
+        <span class="text-sm">Dokumen Audit Mutu Internal dan hasil audit dilapangan</span>
         
         <div class="w-full pt-4">
             <div class="grid grid-cols-4 items-center">
@@ -61,15 +61,13 @@
                                 </span>
                             </td>
                             <td class="text-left py-3 px-4 flex justify-end space-x-2">
-                                @if ($item->status=="dalam validasi")
+                                @if ($item->status!="selesai")
                                     <x-atom.link-table-only-faicon icon="fas fa-eye" warna="blue" class="px-2 py-1"
-                                    href="{{ route('jawabanAmiDokumen.detail', ['id'=>$item->id]) }}"/>
-                                    {{-- <x-atom.link-table-with-faicon icon="fas fa-pen-alt" warna="blue" class="px-2 py-1"
-                                    href="{{ route('jawabanAmiDokumen.edit', ['id'=>$item->id]) }}">
-                                    Jawab
-                                    </x-atom.link-table-with-faicon>
+                                    href="{{ route('auditorAmidokumen.detail', ['id'=>$item->id]) }}"/>
+                                    <x-atom.link-table-only-faicon icon="fas fa-pen-alt" warna="orange" class="px-2 py-1"
+                                    href="{{ route('auditorAmidokumen.edit', ['id'=>$item->id]) }}"/>
 
-                                    <x-atom.button-table-with-faicon icon="fas fa-check" warna="green"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixSelesaiJawabanAmiDokumen','{{$item->id}}','anda akan menyelesaikan pengisian dan tidak dapat diubah lagi. Apakah anda sudah memastikan data sudah benar?')">
+                                    {{-- <x-atom.button-table-with-faicon icon="fas fa-check" warna="green"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixSelesaiJawabanAmiDokumen','{{$item->id}}','anda akan menyelesaikan pengisian dan tidak dapat diubah lagi. Apakah anda sudah memastikan data sudah benar?')">
                                         Selesaikan
                                     </x-atom.button-table-with-faicon> --}}
                                 @else

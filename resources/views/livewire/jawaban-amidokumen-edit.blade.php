@@ -10,7 +10,7 @@
     <main class="w-full flex-grow p-6">
 
         <div class="flex justify-between">
-            <h1 class="text-3xl text-black pb-4">Jawaban Audit Dokumen</h1>
+            <h1 class="text-3xl text-black pb-4">Edit Jawaban Audit Dokumen</h1>
             <div class="space-x-2 mt-2 mr-8">
                 <x-atom.button-link :color="'emerald'" wire:click="refreshJawaban">
                     Refresh

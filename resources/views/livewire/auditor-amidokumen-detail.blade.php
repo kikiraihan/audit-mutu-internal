@@ -67,6 +67,28 @@
                             Catatan auditee : <br>{{$item->catatan?$item->catatan:'-'}}
                         </div>
                     </div>
+
+                    <div class="flex border-b border-40 bg-green-50 justify-between items-center">
+                        <div class="w-1/12 p-4 text-xs text-gray-500">auditor :</div>
+                        <div class="w-1/12 p-4 break-words text-center">
+                            @if ($item->kts=='ob')
+                                <x-atom.badge class="bg-green-200 rounded capitalize">
+                                    observasi
+                                </x-atom.badge>
+                            @elseif ($item->kts=='kts')
+                                <x-atom.badge class="bg-red-200 rounded capitalize">
+                                    ketidaksesuaian
+                                </x-atom.badge>
+                            @else
+                                <x-atom.badge class="bg-slate-200 rounded capitalize">
+                                    Belum
+                                </x-atom.badge>
+                            @endif
+                        </div>
+                        <div class="w-9/12 p-4 break-words text-xs">
+                            {{$item->deskripsi?$item->deskripsi:'-'}}
+                        </div>
+                    </div>
                 @endforeach
 
 
