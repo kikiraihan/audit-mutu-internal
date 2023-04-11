@@ -67,9 +67,7 @@
                                     <x-atom.link-table-only-faicon icon="fas fa-pen-alt" warna="orange" class="px-2 py-1"
                                     href="{{ route('auditorAmidokumen.edit', ['id'=>$item->id]) }}"/>
 
-                                    {{-- <x-atom.button-table-with-faicon icon="fas fa-check" warna="green"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixSelesaiJawabanAmiDokumen','{{$item->id}}','anda akan menyelesaikan pengisian dan tidak dapat diubah lagi. Apakah anda sudah memastikan data sudah benar?')">
-                                        Selesaikan
-                                    </x-atom.button-table-with-faicon> --}}
+                                    <x-atom.button-table-only-faicon icon="fas fa-check" warna="green"  class="px-2 py-1" wire:click="$emit('swalAndaYakin','FixSelesaiAuditorAmiDokumen','{{$item->id}}','anda akan menyelesaikan pengisian dan tidak dapat diubah lagi. Apakah anda sudah memastikan data sudah benar?')"/>
                                 @else
                                     <x-atom.badge class="bg-green-200 rounded">
                                         Selesai diperiksa

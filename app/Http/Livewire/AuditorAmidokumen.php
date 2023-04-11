@@ -12,6 +12,11 @@ class AuditorAmidokumen extends Component
     use WithPagination;
     public $search;
 
+    protected $listeners=[
+        'FixSelesaiAuditorAmiDokumen'=>'SelesaiAuditorAmiDokumen',
+        'FixBatalSelesaiAuditorAmiDokumen'=>'BatalSelesaiAuditorAmiDokumen',
+    ];
+
 
     public function render()
     {
@@ -27,6 +32,20 @@ class AuditorAmidokumen extends Component
 
         return view('livewire.auditor-amidokumen',[
             'isiTabel' => $ami->paginate(30),
+        ]);
+    }
+
+    public function SelesaiAuditorAmiDokumen($id)
+    {
+        FormAmiDokumen::find($id)->update([
+            'status'=>'selesai',
+        ]);
+    }
+
+    public function BatalSelesaiAuditorAmiDokumen($id)
+    {
+        FormAmiDokumen::find($id)->update([
+            'status'=>'dalam validasi',
         ]);
     }
 }
