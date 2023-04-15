@@ -72,7 +72,7 @@
                     @if ($item->kts!='belum')
                         <div class="flex border-b border-40 bg-green-50 justify-between items-center">
                             <div class="w-1/12 p-4 text-xs text-gray-500">auditor :</div>
-                            <div class="w-1/12 p-4 break-words text-center">
+                            <div class="w-2/12 p-4 break-words text-center">
                                 @if ($item->kts=='ob')
                                     <x-atom.badge class="bg-green-200 rounded capitalize">
                                         observasi
@@ -87,7 +87,7 @@
                                     </x-atom.badge>
                                 @endif
                             </div>
-                            <div class="w-9/12 p-4 break-words text-xs">
+                            <div class="w-8/12 p-4 break-words text-xs">
                                 {{$item->deskripsi?$item->deskripsi:'-'}}
                             </div>
                         </div>
