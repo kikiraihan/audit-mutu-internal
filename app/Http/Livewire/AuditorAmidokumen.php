@@ -50,9 +50,9 @@ class AuditorAmidokumen extends Component
         ]);
     }
 
-    public function generatePDF()
+    public function generatePDF($id)
     {
-        $data = FormAmiDokumen::with(['amiDokumen.uraians.suburaians', 'jawabanFormAmiDokumens.jawabanable', 'jawabanFormAmiDokumens.deskripsiTemuan', 'timAuditors', 'auditee'])->where('id', 2)->first();
+        $data = FormAmiDokumen::with(['amiDokumen.uraians.suburaians', 'jawabanFormAmiDokumens.jawabanable', 'jawabanFormAmiDokumens.deskripsiTemuan', 'timAuditors', 'auditee'])->where('id', $id)->first();
         $pass = [
             'ami' => $data->amiDokumen,
             'form' => $data,

@@ -75,7 +75,7 @@
                                     Selesai diperiksa
                                 </x-atom.badge> --}}
                                 <x-atom.button-table-with-faicon icon="fas fa-download" warna="green" class="px-2 py-1"
-                                    wire:click="generatePDF">
+                                    wire:click="generatePDF({{$item->id}})">
                                     Laporan
                                 </x-atom.button-table-with-faicon>
 
