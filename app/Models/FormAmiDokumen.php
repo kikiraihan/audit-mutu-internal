@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class FormAmiDokumen extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'id_user_auditee',
         'id_ami_dokumen',
         'ruang_lingkup',
         'wakil_auditee',
+        'di_review_oleh',
         'status',
 
         // diisi auditor di audit lapangan
@@ -39,6 +40,11 @@ class FormAmiDokumen extends Model
     public function timAuditors()
     {
         return $this->belongsToMany(User::class, 'tim_auditors', 'id_form_ami_dokumen', 'id_user_auditor')->withPivot('status');
+    }
+
+    public function deskripsiTemuan()
+    {
+        return $this->hasMany(DeskripsiTemuan::class, 'id_form_ami_dokumen');
     }
 
     // public function jawabanFormAmiDokumensUraian()

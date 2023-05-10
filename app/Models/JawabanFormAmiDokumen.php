@@ -30,4 +30,9 @@ class JawabanFormAmiDokumen extends Model
     {
         return $this->belongsTo(FormAmiDokumen::class, 'id_form_ami_dokumen');
     }
+
+    public function deskripsiTemuan()
+    {
+        return $this->hasOne(DeskripsiTemuan::class, 'id_jawaban_form_ami_dokumens');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFLaporanController;
 use App\Http\Livewire\AmidokumenAdd;
 use App\Http\Livewire\AmidokumenDetail;
 use App\Http\Livewire\AmidokumenEdit;
@@ -7,6 +8,9 @@ use App\Http\Livewire\AmidokumenIndex;
 use App\Http\Livewire\AuditorAmidokumen;
 use App\Http\Livewire\AuditorAmidokumenDetail;
 use App\Http\Livewire\AuditorAmidokumenEdit;
+use App\Http\Livewire\DeskripsiTemuanAdd;
+use App\Http\Livewire\DeskripsiTemuanEdit;
+use App\Http\Livewire\DeskripsiTemuanIndex;
 use App\Http\Livewire\FormAmidokumenAdd;
 use App\Http\Livewire\FormAmidokumenEdit;
 use App\Http\Livewire\FormAmidokumenIndex;
@@ -19,6 +23,7 @@ use App\Http\Livewire\SuburaianEdit;
 use App\Http\Livewire\UserAdd;
 use App\Http\Livewire\UserEdit;
 use App\Http\Livewire\UserIndex;
+use App\Models\FormAmiDokumen;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,15 +40,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {return view('welcome');})->name('base');
-Route::get('/dashboard', function () {return view('dashboard');})
+Route::get('/', function () {
+    return view('welcome');
+})->name('base');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})
     ->middleware(['auth'])->name('dashboard');
 Route::get('/instrumen', AmidokumenIndex::class)->name('amidokumen')
     ->middleware('role:Auditor|Admin');
 Route::get('/instrumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail')
     ->middleware('role:Auditor|Admin');
 
-Route::group(['middleware' => ['auth','role:Admin']], function ($route) {    
+Route::group(['middleware' => ['auth', 'role:Admin']], function ($route) {
     $route->get('/instrumen/add', AmidokumenAdd::class)->name('amidokumen.add');
     $route->get('/instrumen/{id}/edit', AmidokumenEdit::class)->name('amidokumen.edit');
     $route->get('/instrumen/{id}/edit-suburaian', SuburaianEdit::class)->name('amidokumen.edit.suburaian');
@@ -58,19 +67,42 @@ Route::group(['middleware' => ['auth','role:Admin']], function ($route) {
     $route->get('/form-amidokumen/{id}/auditor', FormAmidokumenTimauditor::class)->name('formAmiDokumen.auditor');
 });
 
-Route::group(['middleware' => ['auth','role:Auditee']], function ($route) {
+Route::group(['middleware' => ['auth', 'role:Auditee']], function ($route) {
     $route->get('/jawaban-amidokumen', JawabanAmidokumenIndex::class)->name('jawabanAmiDokumen');
     $route->get('/jawaban-amidokumen/{id}/edit', JawabanAmidokumenEdit::class)->name('jawabanAmiDokumen.edit');
     $route->get('/jawaban-amidokumen/{id}/detail', JawabanAmidokumenDetail::class)->name('jawabanAmiDokumen.detail');
 });
 
-Route::group(['middleware' => ['auth','role:Auditor']], function ($route) {    
+Route::group(['middleware' => ['auth', 'role:Auditor']], function ($route) {
     $route->get('/auditor-amidokumen', AuditorAmidokumen::class)->name('auditorAmidokumen');
     $route->get('/auditor-jawaban-amidokumen/{id}/edit', AuditorAmidokumenEdit::class)->name('auditorAmidokumen.edit');
     $route->get('/auditor-jawaban-amidokumen/{id}/detail', AuditorAmidokumenDetail::class)->name('auditorAmidokumen.detail');
+    $route->get('/deskripsi-temuan', DeskripsiTemuanIndex::class)->name('deskripsiTemuan');
+    $route->get('/deskripsi-temuan/add/{id}', DeskripsiTemuanAdd::class)->name('deskripsiTemuan.add');
+    $route->get('/deskripsi-temuan/{id}/edit', DeskripsiTemuanEdit::class)->name('deskripsiTemuan.edit');
 });
 
 
 
 
-require __DIR__.'/auth.php';
+
+
+
+Route::get('/coba', function () {
+    $data = FormAmiDokumen::with(['amiDokumen.uraians.suburaians', 'jawabanFormAmiDokumens.jawabanable', 'jawabanFormAmiDokumens.deskripsiTemuan', 'timAuditors', 'auditee'])->where('id', 2)->first();
+    return view('pdf.laporan', [
+        'ami' => $data->amiDokumen,
+        'form' => $data,
+        'jawabanForm' => $data->jawabanFormAmiDokumens,
+        'timAuditor' => $data->timAuditors,
+        'ketuaAuditor' => $data->timAuditors()->where('status', 'ketua')->first(),
+        'user_auditee' => $data->auditee,
+        'temuan' => $data->jawabanFormAmiDokumens()->where('kts', 'kts')->get(),
+    ]);
+})->name('base');
+
+
+
+
+
+require __DIR__ . '/auth.php';

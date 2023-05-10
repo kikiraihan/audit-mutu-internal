@@ -24,5 +24,4 @@ class Auditee extends Model
     {
         return $this->hasManyThrough(FormAmiDokumen::class, User::class, 'id_user', 'id_user_auditee');
     }
-    
 }

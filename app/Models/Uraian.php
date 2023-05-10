@@ -17,12 +17,12 @@ class Uraian extends Model
 
     public function amiDokumen()
     {
-        return $this->belongsTo(AmiDokumen::class,'id_ami_dokumen','id');
+        return $this->belongsTo(AmiDokumen::class, 'id_ami_dokumen', 'id');
     }
 
     public function suburaians()
     {
-        return $this->hasMany(SubUraian::class,'id_uraian','id');
+        return $this->hasMany(SubUraian::class, 'id_uraian', 'id');
     }
 
     public function JawabanFormAmiDokumens()

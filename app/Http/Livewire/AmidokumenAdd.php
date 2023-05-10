@@ -11,11 +11,11 @@ class AmidokumenAdd extends Component
 
     public function mount()
     {
-        $this->ami=new AmiDokumen;
+        $this->ami = new AmiDokumen;
     }
 
     protected $rules = [
-        'ami.judul' => 'required',//string
+        'ami.judul' => 'required', //string
     ];
 
     public function save()
