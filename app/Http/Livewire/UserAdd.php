@@ -19,11 +19,11 @@ class UserAdd extends Component
     }
 
     protected $rules = [
-        'name' => 'required',//string
-        'username' => 'required|unique:users,username',//string
+        'name' => 'required', //string
+        'username' => 'required|unique:users,username', //string
         // 'email' => 'required|email|unique:users,email',//string
-        'role'=>'required',
-        'auditeelevel'=>'nullable|in:fakultas,jurusan,prodi',
+        'role' => 'required',
+        'auditeelevel' => 'nullable|in:fakultas,jurusan,prodi',
     ];
 
 
@@ -39,8 +39,7 @@ class UserAdd extends Component
         $user->save();
         $user->assignRole($this->role);
 
-        if ($this->role=="Auditee") 
-        {
+        if ($this->role == "Auditee") {
             $auditee = new Auditee;
             $auditee->id_user = $user->id;
             // level

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FormAmiDokumen;
 use App\Models\JawabanFormAmiDokumen;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,10 +12,12 @@ class AuditorAmidokumenEdit extends Component
     // use WithPagination;
     public $idFormAmi;
     public $jawabans;
-    // public FormAmiDokumen $form;
+    public FormAmiDokumen $form;
 
     //rule
     protected $rules = [
+        'form.lapangan_lokasi'           => 'required',
+        'form.lapangan_tanggal'          => 'required',
         'jawabans.*.id_form_ami_dokumen'    => 'required',
         'jawabans.*.jawabanable_id'         => 'required',
         'jawabans.*.jawabanable_type'       => 'required',
@@ -30,10 +33,10 @@ class AuditorAmidokumenEdit extends Component
     public function mount($id)
     {
 
-        // $this->form=FormAmiDokumen::with(['amiDokumen.uraians.suburaians'])->where('id',$id)->first();
-        $this->idFormAmi=$id;
-        $this->jawabans=JawabanFormAmiDokumen::with(['jawabanable','formAmiDokumen'])
-            ->where('id_form_ami_dokumen',$this->idFormAmi)
+        $this->form = FormAmiDokumen::with(['amiDokumen.uraians.suburaians'])->where('id', $id)->first();
+        $this->idFormAmi = $id;
+        $this->jawabans = JawabanFormAmiDokumen::with(['jawabanable', 'formAmiDokumen'])
+            ->where('id_form_ami_dokumen', $this->idFormAmi)
             // ->orderBy('jawabanable_type','asc')
             // ->orderBy('jawabanable_id','asc')
             ->get();
@@ -44,6 +47,8 @@ class AuditorAmidokumenEdit extends Component
     public function save()
     {
         $this->validate();
+
+        $this->form->save();
 
         $this->jawabans->each->save();
 

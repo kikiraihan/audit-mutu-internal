@@ -17,19 +17,21 @@ class FormAmidokumenEdit extends Component
     public $searchAmi;
 
     public $idTo;
-    
+
     public function mount($id)
     {
-        $this->form=FormAmiDokumen::find($id);
-        $this->idTo=$id;
+        $this->form = FormAmiDokumen::find($id);
+        $this->idTo = $id;
     }
 
     protected $rules = [
-        'form.id_user_auditee'  =>'required',
-        'form.id_ami_dokumen'   =>'required',
-        'form.ruang_lingkup'    =>'nullable',
-        'form.wakil_auditee'    =>'required',
-        'form.status'           =>'required',
+        'form.id_user_auditee'  => 'required',
+        'form.id_ami_dokumen'   => 'required',
+        'form.ruang_lingkup'    => 'nullable',
+        'form.wakil_auditee'    => 'required',
+        'form.status'           => 'required',
+        // 'form.lapangan_lokasi'           => 'required',
+        // 'form.lapangan_tanggal'          => 'required',
     ];
 
     public function save()
@@ -45,17 +47,17 @@ class FormAmidokumenEdit extends Component
     public function render()
     {
 
-        $auditee=User::has('auditee')
-        ->where('name', 'like', '%'.$this->searchAuditee.'%')
-        ->orderBy('created_at', 'desc');
-        $ami=AmiDokumen::where('judul', 'like', '%'.$this->searchAmi.'%')
-        ->orderBy('created_at', 'desc');
+        $auditee = User::has('auditee')
+            ->where('name', 'like', '%' . $this->searchAuditee . '%')
+            ->orderBy('created_at', 'desc');
+        $ami = AmiDokumen::where('judul', 'like', '%' . $this->searchAmi . '%')
+            ->orderBy('created_at', 'desc');
 
-        return view('livewire.form-amidokumen-edit',[
+        return view('livewire.form-amidokumen-edit', [
             'selectAuditee' => $auditee->paginate(5),
-            'dipilihAuditee'=> $this->form->id_user_auditee?User::find($this->form->id_user_auditee):null,
+            'dipilihAuditee' => $this->form->id_user_auditee ? User::find($this->form->id_user_auditee) : null,
             'selectAmi' => $ami->paginate(5),
-            'dipilihAmi'=> $this->form->id_ami_dokumen?AmiDokumen::find($this->form->id_ami_dokumen):null,
+            'dipilihAmi' => $this->form->id_ami_dokumen ? AmiDokumen::find($this->form->id_ami_dokumen) : null,
         ]);
     }
 
