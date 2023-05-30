@@ -30,6 +30,13 @@ return [
 
     'disks' => [
 
+        '__template_surat' => [
+            'driver' => 'local',
+            'root' => public_path('__template_surat'),
+            'url' => env('APP_URL').'/__template_surat',
+            'visibility' => 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

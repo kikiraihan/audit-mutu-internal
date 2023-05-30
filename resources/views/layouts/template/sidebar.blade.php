@@ -21,6 +21,7 @@
         ['route' => 'amidokumen', 'title' => 'Instrumen AMI','icon'=>'fas fa-table mr-3'],
         ['route' => 'formAmiDokumen', 'title' => 'Audit Dokumen','icon'=>'fas fa-list-alt mr-3'],
         ['route' => 'user', 'title' => 'Users','icon'=>'fas fa-users mr-3'],
+        ['route' => 'templateSurat', 'title' => 'Template Surat','icon'=>'fas fa-envelope mr-3'],
         ] as $item)
         <a href="{{ route($item['route']) }}"
             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline w-full h-full py-3 px-2 border-b border-light-border flex justify-between @if(request()->routeIs($item['route'])) bg-white @else @endif">

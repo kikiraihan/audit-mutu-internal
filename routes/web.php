@@ -8,6 +8,7 @@ use App\Http\Livewire\AmidokumenIndex;
 use App\Http\Livewire\AuditorAmidokumen;
 use App\Http\Livewire\AuditorAmidokumenDetail;
 use App\Http\Livewire\AuditorAmidokumenEdit;
+use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\DeskripsiTemuanAdd;
 use App\Http\Livewire\DeskripsiTemuanEdit;
 use App\Http\Livewire\DeskripsiTemuanIndex;
@@ -20,6 +21,9 @@ use App\Http\Livewire\JawabanAmidokumenDetail;
 use App\Http\Livewire\JawabanAmidokumenEdit;
 use App\Http\Livewire\JawabanAmidokumenIndex;
 use App\Http\Livewire\SuburaianEdit;
+use App\Http\Livewire\TemplateSuratAdd;
+use App\Http\Livewire\TemplateSuratEdit;
+use App\Http\Livewire\TemplateSuratIndex;
 use App\Http\Livewire\UserAdd;
 use App\Http\Livewire\UserEdit;
 use App\Http\Livewire\UserIndex;
@@ -43,10 +47,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('base');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-    ->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', Dashboard::class)->middleware(['auth'])->name('dashboard');
+
+
 Route::get('/instrumen', AmidokumenIndex::class)->name('amidokumen')
     ->middleware('role:Auditor|Admin');
 Route::get('/instrumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail')
@@ -65,6 +68,11 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function ($route) {
     $route->get('/form-amidokumen/add', FormAmidokumenAdd::class)->name('formAmiDokumen.add');
     $route->get('/form-amidokumen/{id}/edit', FormAmidokumenEdit::class)->name('formAmiDokumen.edit');
     $route->get('/form-amidokumen/{id}/auditor', FormAmidokumenTimauditor::class)->name('formAmiDokumen.auditor');
+
+    $route->get('/template-surat', TemplateSuratIndex::class)->name('templateSurat');
+    $route->get('/template-surat/add', TemplateSuratAdd::class)->name('templateSurat.add');
+    $route->get('/template-surat/{id}/edit', TemplateSuratEdit::class)->name('templateSurat.edit');
+
 });
 
 Route::group(['middleware' => ['auth', 'role:Auditee']], function ($route) {
@@ -87,8 +95,12 @@ Route::group(['middleware' => ['auth', 'role:Auditor']], function ($route) {
 
 
 
+Route::get('coba',function(){
+    return 'hello';
+});
 
-Route::get('/coba', function () {
+
+Route::get('/laporan/coba', function () {
     $data = FormAmiDokumen::with(['amiDokumen.uraians.suburaians', 'jawabanFormAmiDokumens.jawabanable', 'jawabanFormAmiDokumens.deskripsiTemuan', 'timAuditors', 'auditee'])->where('id', 2)->first();
     return view('pdf.laporan', [
         'ami' => $data->amiDokumen,
