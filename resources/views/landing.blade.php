@@ -18,6 +18,7 @@
         
                         <div class="hidden md:block">
                             <a href="{{ route('login') }}" class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Login</a>
+                            
                         </div>
                     </div>
                 </div>
