@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/__template_surat
 /storage/*.key
 /vendor
 .env
