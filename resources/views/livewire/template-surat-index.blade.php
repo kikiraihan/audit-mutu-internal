@@ -9,8 +9,8 @@
 
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
-        <h1 class="text-3xl">Audit Dokumen</h1>
-        <span class="text-sm">Formulir pengisian Dokumen Audit Mutu Internal</span>
+        <h1 class="text-3xl">Template surat</h1>
+        <span class="text-sm">Template surat yang dapat digunakan dalam audit</span>
         
         <div class="w-full pt-4">
             <div class="grid grid-cols-4 items-center">
