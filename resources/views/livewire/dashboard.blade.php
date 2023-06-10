@@ -28,7 +28,6 @@
       });
 
       // line_form_ami
-
       const chart_line_form_audit = document.getElementById('chart_line_form_audit');
       const labels = [ '{!! implode("', '",$line_form_ami['bulan']) !!}' ];
       const data = {
@@ -52,21 +51,88 @@
           }
         }
       });
+
+      // line_kts
+      const chart_line_KTS = document.getElementById('chart_line_KTS');
+      const labels_line_KTS = [ '{!! implode("', '",$line_kts['group']) !!}' ];
+      const data_line_KTS = {
+        labels: labels_line_KTS,
+        datasets: [{
+          label: 'Jumlah KTS per semester',
+          data: [ {!! implode(", ",$line_kts['counts']) !!} ],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      };
+      new Chart(chart_line_KTS, {
+        type: 'line',
+        data: data_line_KTS,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+
+      // line_KTS_per_audite
+      const chart_line_KTS_per_audite = document.getElementById('chart_line_KTS_per_audite');
+      const labels_line_KTS_per_audite = [ '{!! implode("', '",$line_kts_per_audite['name']) !!}' ];
+      const data_line_KTS_per_audite = {
+        labels: labels_line_KTS_per_audite,
+        datasets: [{
+          label: 'Jumlah KTS per auditee',
+          data: [ {!! implode(", ",$line_kts_per_audite['jumlah_kts']) !!} ],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      };
+      new Chart(chart_line_KTS_per_audite, {
+        type: 'line',
+        data: data_line_KTS_per_audite,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
     </script>
 </x-slot>
 
-<div class="w-full overflow-x-hidden flex flex-row p-3 gap-6">
-  <div class="w-1/3 flex flex-col items-center">
-    <div>
-      Auditee per tipe
-    </div>
-    <canvas id="chart_pie_auditee"></canvas>
-  </div>
+<div class="w-full grid grid-flow-row grid-cols-3 gap-6">
+  
 
-  <div class="w-2/3 flex flex-col items-center">
+  {{-- <div class="flex flex-col items-center">
     <div>
       Aktivitas Form Audit
     </div>
     <canvas id="chart_line_form_audit"></canvas>
+  </div> --}}
+
+  <div class="flex flex-col items-center">
+    <div>
+      Hasil penilaian AMI Per Semester Tahun {{$line_kts['currentYear']}}
+    </div>
+    <canvas id="chart_line_KTS"></canvas>
+  </div>
+
+  <div class="flex flex-col items-center">
+    <div>
+      Hasil penilaian AMI Per Auditee Tahun {{$line_kts['currentYear']}}
+    </div>
+    <canvas id="chart_line_KTS_per_audite"></canvas>
+  </div>
+
+  <div class="flex flex-col items-center">
+    <div>
+      Auditee per tipe
+    </div>
+    <canvas id="chart_pie_auditee"></canvas>
   </div>
 </div>
