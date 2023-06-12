@@ -38,7 +38,14 @@
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Created at</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Dokumen AMI</th>
                             <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditee</th>
-                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditor</th>
+                            {{-- <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditor</th> --}}
+                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
+                                <div class="text-xs">
+                                    <span class="mr-2">KTS</span>:
+                                    <span class="mr-2">OB</span>:
+                                    <span class="mr-2">Belum</span>
+                                </div>
+                            </th>
                             <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Status</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
                         </tr>
@@ -55,13 +62,17 @@
                                 </div>
                             </td>
                             <td class="text-center py-3 px-4">
-                                <span class="mr-2">{{$item->timAuditors->count()}}</span>
-                                <x-atom.link-table-only-faicon icon="fas fa-user-edit" 
-                                    warna="amber" class="px-2 py-1"
-                                    href="{{ route('formAmiDokumen.auditor', ['id'=>$item->id]) }}"/>
+                                <span class="mr-2 text-red-400">{{$item->jawaban_kts_count}}</span>:
+                                <span class="mr-2 text-green-400">{{$item->jawaban_ob_count}}</span>:
+                                <span class="mr-2 text-gray-400">{{$item->jawaban_belum_count}}</span>
                             </td>
                             <td class="text-center py-3 px-4">{{$item->status}}</td>
                             <td class="text-left py-3 px-4 flex justify-end space-x-2">
+                                <x-atom.link-table-with-faicon icon="fas fa-user-edit" 
+                                    warna="amber" class="px-2 py-1"
+                                    href="{{ route('formAmiDokumen.auditor', ['id'=>$item->id]) }}">
+                                    <span class="mr-2">{{$item->timAuditors->count()}}</span>
+                                </x-atom.link-table-with-faicon>
                                 <x-atom.link-table-only-faicon icon="fas fa-edit" 
                                     warna="yellow" class="px-2 py-1"
                                     href="{{ route('formAmiDokumen.edit', ['id'=>$item->id]) }}"/>

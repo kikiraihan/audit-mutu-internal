@@ -19,13 +19,11 @@ class FormAmidokumenIndex extends Component
     public function render()
     {
         //get form ami dokumenwhereHas user name like
-        $ami=FormAmiDokumen::with(['auditee','amiDokumen','timAuditors'])->whereHas('auditee', function($q){
+        $ami=FormAmiDokumen::with(['auditee','amiDokumen','timAuditors','jawabanFormAmiDokumens'])->whereHas('auditee', function($q){
             $q->where('name', 'like', '%'.$this->search.'%');
         })->orWhereHas('amiDokumen', function($q){
             $q->where('judul', 'like', '%'.$this->search.'%');
         })->orderBy('created_at', 'desc');
-
-        // dd($ami->first());
         
 
         return view('livewire.form-amidokumen-index', [

@@ -9,6 +9,9 @@ class FormAmiDokumen extends Model
 {
     use HasFactory;
 
+    protected $appends = ['jawaban_kts_count','jawaban_ob_count','jawaban_belum_count'];
+
+
     protected $fillable = [
         'id_user_auditee',
         'id_ami_dokumen',
@@ -35,6 +38,21 @@ class FormAmiDokumen extends Model
     public function jawabanFormAmiDokumens()
     {
         return $this->hasMany(JawabanFormAmiDokumen::class, 'id_form_ami_dokumen');
+    }
+
+    public function getJawabanKtsCountAttribute()
+    {
+        return $this->jawabanFormAmiDokumens()->where('kts', 'kts')->count();
+    }
+
+    public function getJawabanObCountAttribute()
+    {
+        return $this->jawabanFormAmiDokumens()->where('kts', 'ob')->count();
+    }
+
+    public function getJawabanBelumCountAttribute()
+    {
+        return $this->jawabanFormAmiDokumens()->where('kts', 'belum')->count();
     }
 
     public function timAuditors()
