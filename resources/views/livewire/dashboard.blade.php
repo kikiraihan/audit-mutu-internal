@@ -106,27 +106,27 @@
                     label: 'Jumlah KTS',
                     data: [{!!implode(", ", $line_kts_per_audite['jumlah_kts']) !!}],
                     fill: false,
-                    borderColor: 'rgb(227, 134, 142)',
+                    backgroundColor: 'rgb(227, 134, 142)',
                     tension: 0.1
                 },
                 {
                     label: 'Jumlah OB',
                     data: [{!!implode(", ", $line_kts_per_audite['jumlah_ob']) !!}],
                     fill: false,
-                    borderColor: 'rgb(110, 192, 75)',
+                    backgroundColor: 'rgb(110, 192, 75)',
                     tension: 0.1
                 },
                 {
                     label: 'Jumlah Belum',
                     data: [{!!implode(", ", $line_kts_per_audite['jumlah_belum']) !!}],
                     fill: false,
-                    borderColor: 'rgb(227, 220, 221)',
+                    backgroundColor: 'rgb(227, 220, 221)',
                     tension: 0.1
                 },
             ]
         };
         new Chart(chart_line_KTS_per_audite, {
-            type: 'line',
+            type: 'bar',
             data: data_line_KTS_per_audite,
             options: {
                 scales: {
