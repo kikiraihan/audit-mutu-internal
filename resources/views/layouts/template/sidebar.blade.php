@@ -19,7 +19,7 @@
         @hasanyrole('Admin')
         @foreach ([
         ['route' => 'amidokumen', 'title' => 'Instrumen AMI','icon'=>'fas fa-table mr-3'],
-        ['route' => 'formAmiDokumen', 'title' => 'Audit Dokumen','icon'=>'fas fa-list-alt mr-3'],
+        ['route' => 'formAmiDokumen', 'title' => 'Audit Mutu Internal','icon'=>'fas fa-list-alt mr-3'],
         ['route' => 'user', 'title' => 'Users','icon'=>'fas fa-users mr-3'],
         ['route' => 'templateSurat', 'title' => 'Template Surat','icon'=>'fas fa-envelope mr-3'],
         ] as $item)

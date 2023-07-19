@@ -12,6 +12,7 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\DeskripsiTemuanAdd;
 use App\Http\Livewire\DeskripsiTemuanEdit;
 use App\Http\Livewire\DeskripsiTemuanIndex;
+use App\Http\Livewire\EditProfile;
 use App\Http\Livewire\FormAmidokumenAdd;
 use App\Http\Livewire\FormAmidokumenEdit;
 use App\Http\Livewire\FormAmidokumenIndex;
@@ -54,6 +55,8 @@ Route::get('/instrumen', AmidokumenIndex::class)->name('amidokumen')
     ->middleware('role:Auditor|Admin');
 Route::get('/instrumen/{id}/detail', AmidokumenDetail::class)->name('amidokumen.detail')
     ->middleware('role:Auditor|Admin');
+    Route::get('/my-profile', EditProfile::class)->name('profile.edit')
+    ->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function ($route) {
     $route->get('/instrumen/add', AmidokumenAdd::class)->name('amidokumen.add');
@@ -72,7 +75,6 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function ($route) {
     $route->get('/template-surat', TemplateSuratIndex::class)->name('templateSurat');
     $route->get('/template-surat/add', TemplateSuratAdd::class)->name('templateSurat.add');
     $route->get('/template-surat/{id}/edit', TemplateSuratEdit::class)->name('templateSurat.edit');
-
 });
 
 Route::group(['middleware' => ['auth', 'role:Auditee']], function ($route) {

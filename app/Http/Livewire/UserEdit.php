@@ -13,6 +13,7 @@ class UserEdit extends Component
     public $username;
     // public $email;
     public $role;
+    public $auditeelevel;
 
     public function mount($id)
     {
@@ -22,6 +23,11 @@ class UserEdit extends Component
         // $this->email = $user->email;
         $this->role = $user->roles->first()->name;
         $this->idTo = $id;
+        
+        if ($this->role == "Auditee") {
+            $auditee = $user->auditee;
+            $this->auditeelevel = $auditee->level;
+        }
     }
 
     public function rules()
@@ -43,6 +49,14 @@ class UserEdit extends Component
         $user->name = $this->name;
         $user->username = strtolower($this->username);
         // $user->email = $this->email;
+
+        //if role is auditee update auditee level
+        if ($this->role == "Auditee") {
+            $auditee = $user->auditee;
+            $auditee->level = $this->auditeelevel;
+            $auditee->save();
+        }
+        
         $user->save();
         // $user->syncRoles([$this->role]);
 

@@ -67,6 +67,26 @@
                     </div> --}}
 
 
+                    @if ($role == 'Auditee')
+                        <div class="flex border-b border-40">
+                            <div class="w-1/4 py-4">
+                                <h4 class="font-normal text-80">Tipe</h4>
+                            </div> 
+                            <div class="w-3/4 py-4 break-words">
+                                <x-atom.form-select-standar wire:model="auditeelevel">
+                                    <option value="" hidden selected>[belum dipilih]</option>
+                                    @foreach (['fakultas','jurusan','prodi'] as $item)
+                                        <option class="w-full capitalize" value='{{$item}}'>
+                                            {{$item}}
+                                        </option>
+                                    @endforeach
+                                </x-atom.form-select-standar>
+                                <x-atom.form-error-input :kolom="'auditeelevel'" />
+                            </div>
+                        </div>
+                    @endif
+
+
                 </div>
             </form>
 

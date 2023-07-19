@@ -9,7 +9,7 @@
 
 <div class="w-full overflow-x-hidden flex flex-col">
     <main class="w-full flex-grow p-6">
-        <h1 class="text-3xl">Audit Dokumen</h1>
+        <h1 class="text-3xl">Audit Mutu Internal</h1>
         <span class="text-sm">Formulir pengisian Dokumen Audit Mutu Internal</span>
         
         <div class="w-full pt-4">
@@ -39,12 +39,21 @@
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Dokumen AMI</th>
                             <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditee</th>
                             {{-- <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Auditor</th> --}}
-                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
+                            {{-- <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
                                 <div class="text-xs">
                                     <span class="mr-2">KTS</span>:
                                     <span class="mr-2">OB</span>:
                                     <span class="mr-2">Belum</span>
                                 </div>
+                            </th> --}}
+                            <th class="text-center py-3 px-1 uppercase font-semibold text-sm">
+                                KTS
+                            </th>
+                            <th class="text-center py-3 px-1 uppercase font-semibold text-sm">
+                                OB
+                            </th>
+                            <th class="text-center py-3 px-1 uppercase font-semibold text-sm">
+                                Belum
                             </th>
                             <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Status</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
@@ -61,10 +70,19 @@
                                     <x-atom.badge class="">{{$item->auditee->name}}</x-atom.badge>
                                 </div>
                             </td>
-                            <td class="text-center py-3 px-4">
+                            {{-- <td class="text-center py-3 px-4">
                                 <span class="mr-2 text-red-400">{{$item->jawaban_kts_count}}</span>:
                                 <span class="mr-2 text-green-400">{{$item->jawaban_ob_count}}</span>:
                                 <span class="mr-2 text-gray-400">{{$item->jawaban_belum_count}}</span>
+                            </td> --}}
+                            <td class="text-center py-3 px-1">
+                                {{$item->jawaban_kts_count}}
+                            </td>
+                            <td class="text-center py-3 px-1">
+                                {{$item->jawaban_ob_count}}
+                            </td>
+                            <td class="text-center py-3 px-1">
+                                {{$item->jawaban_belum_count}}
                             </td>
                             <td class="text-center py-3 px-4">{{$item->status}}</td>
                             <td class="text-left py-3 px-4 flex justify-end space-x-2">
