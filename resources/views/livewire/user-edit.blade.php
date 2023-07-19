@@ -45,12 +45,13 @@
                         </div>
                     </div>
 
-                    {{-- <div class="flex border-b border-40">
+                    <div class="flex border-b border-40">
                         <div class="w-1/4 py-4">
                             <h4 class="font-normal text-80">Role</h4>
                         </div> 
                         <div class="w-3/4 py-4 break-words">
-                            <x-atom.form-select-standar wire:model="role">
+                            <span class="text-gray-500 text-sm px-3">{{$role}}</span>
+                            {{-- <x-atom.form-select-standar wire:model="role">
                                 <option value="" hidden selected>[belum dipilih]</option>
                                 @foreach ([
                                     'Admin',
@@ -62,9 +63,9 @@
                                     </option>
                                 @endforeach
                             </x-atom.form-select-standar>
-                            <x-atom.form-error-input :kolom="'role'" />
+                            <x-atom.form-error-input :kolom="'role'" /> --}}
                         </div>
-                    </div> --}}
+                    </div>
 
 
                     @if ($role == 'Auditee')
